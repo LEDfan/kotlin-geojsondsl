@@ -1,9 +1,33 @@
 import be.ledfan.geojsondsl.*
+import com.beust.klaxon.JsonArray
+import com.beust.klaxon.json
+import geojsondsl.ICoordinate
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
-data class Coordinate(override val lat: Double, override val lon: Double) : ICoordinate
+data class Coordinate(val lat: Double, val lon: Double) : ICoordinate {
+    override fun toJson(): JsonArray<Double> {
+        return json {
+            array(
+                    lon,
+                    lat
+            )
+        } as JsonArray<Double>
+    }
+}
+
+data class ThreeDCoordinate(val lat: Double, val lon: Double, val alt: Double) : ICoordinate {
+    override fun toJson(): JsonArray<Double> {
+        return json {
+            array(
+                    lon,
+                    lat,
+                    alt
+            )
+        } as JsonArray<Double>
+    }
+}
 
 class FeatureTests {
 
@@ -389,5 +413,16 @@ class FeatureTests {
             }
         }.toJson().toJsonString()
         assertEquals("""{"type":"FeatureCollection","features":[{"type":"Feature","id":"test","geometry":{"type":"Point","coordinates":[1.0,1.0]},"properties":{}},{"type":"Feature","id":"test","geometry":{"type":"GeometryCollection","geometries":[{"type":"MultiPoint","coordinates":[[3.0,2.0],[5.0,4.0]]},{"type":"Point","coordinates":[6.0,5.0]}]},"properties":{}}]}""", actual)
+    }
+
+    @Test
+    fun threeD_test() {
+        val actual = feature {
+            withGeometry {
+                point(ThreeDCoordinate(1.0, 2.0, 3.0))
+            }
+        }.toJson().toJsonString()
+
+        assertEquals("""{"type":"Feature","geometry":{"type":"Point","coordinates":[2.0,1.0,3.0]},"properties":{}}""", actual)
     }
 }

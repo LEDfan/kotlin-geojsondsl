@@ -1,5 +1,7 @@
 package be.ledfan.geojsondsl
 
+import geojsondsl.ICoordinate
+
 class GeometryFactory {
 
     var geometry: Geometry? = null

@@ -2,6 +2,7 @@ package be.ledfan.geojsondsl
 
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.json
+import geojsondsl.ICoordinate
 
 class Ring {
 

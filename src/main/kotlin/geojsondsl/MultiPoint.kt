@@ -2,6 +2,7 @@ package be.ledfan.geojsondsl
 
 import com.beust.klaxon.JsonObject
 import com.beust.klaxon.json
+import geojsondsl.ICoordinate
 
 open class MultiPoint : Geometry {
 
