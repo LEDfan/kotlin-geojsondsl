@@ -29,7 +29,7 @@ data class ThreeDCoordinate(val lat: Double, val lon: Double, val alt: Double) :
     }
 }
 
-class FeatureTests {
+class FeatureTest {
 
     @Test
     fun normal_linestring() {

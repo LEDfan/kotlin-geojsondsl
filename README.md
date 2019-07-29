@@ -2,3 +2,6 @@ kotlin-geojsondsl
 =================
 
 
+# License
+
+TBA
