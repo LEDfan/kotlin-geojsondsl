@@ -14,7 +14,7 @@
  *   limitations under the License.
  */
 
-import be.ledfan.geojsondsli.*
+import be.ledfan.geojsondsl.*
 import com.beust.klaxon.JsonArray
 import com.beust.klaxon.json
 import be.ledfan.geojsondsl.ICoordinate

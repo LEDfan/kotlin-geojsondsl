@@ -6,7 +6,7 @@
 
     <groupId>be.ledfan</groupId>
     <artifactId>kotlin-geojson-dsl</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.2</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -105,7 +105,28 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-ledfan-kotlin-geojsondsl</id>
+            <name>ledfan-kotlin-geojsondsl</name>
+            <url>https://api.bintray.com/maven/ledfan/kotlin-geojsondsl/kotlin-geojsondsl/;publish=1</url>
+        </repository>
+    </distributionManagement>
 
 </project>
