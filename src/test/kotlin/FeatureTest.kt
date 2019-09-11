@@ -432,6 +432,31 @@ class FeatureTest {
     }
 
     @Test
+    fun `feature collection with foreign members`() {
+        val actual = featureCollection {
+            withFeature {
+                withId("test")
+                withGeometry {
+                    point(Coordinate(1.0, 1.0))
+                }
+            }
+            withFeature {
+                withId("test")
+                withGeometryCollection {
+                    multiPoint {
+                        withCoordinate(Coordinate(2.0, 3.0))
+                        withCoordinate(Coordinate(4.0, 5.0))
+                    }
+                    point(Coordinate(5.0, 6.0))
+                }
+            }
+            withForeignMember("member1", "abc")
+            withForeignMember("member2") { array(1) }
+        }.toJson().toJsonString()
+        assertEquals("""{"type":"FeatureCollection","features":[{"type":"Feature","id":"test","geometry":{"type":"Point","coordinates":[1.0,1.0]},"properties":{}},{"type":"Feature","id":"test","geometry":{"type":"GeometryCollection","geometries":[{"type":"MultiPoint","coordinates":[[3.0,2.0],[5.0,4.0]]},{"type":"Point","coordinates":[6.0,5.0]}]},"properties":{}}],"member2":[1],"member1":"abc"}    """, actual)
+    }
+
+    @Test
     fun threeD_test() {
         val actual = feature {
             withGeometry {
