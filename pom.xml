@@ -6,7 +6,7 @@
 
     <groupId>be.ledfan</groupId>
     <artifactId>kotlin-geojson-dsl</artifactId>
-    <version>0.1.2</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
 
     <properties>
