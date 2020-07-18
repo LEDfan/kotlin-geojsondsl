@@ -432,6 +432,33 @@ class FeatureTest {
     }
 
     @Test
+    fun `feature collection with existing features`() {
+        val feature1 = feature {
+            withId("test")
+            withGeometry {
+                point(Coordinate(1.0, 1.0))
+            }
+        }
+        val feature2 = feature {
+            withGeometryCollection {
+                multiPoint {
+                    withCoordinate(Coordinate(2.0, 3.0))
+                    withCoordinate(Coordinate(4.0, 5.0))
+                }
+                point(Coordinate(5.0, 6.0))
+            }
+        }
+        feature2.withId("test")
+
+        val actual = featureCollection {
+            withFeature(feature1)
+            withFeature(feature2)
+        }.toJson().toJsonString()
+
+        assertEquals("""{"type":"FeatureCollection","features":[{"type":"Feature","id":"test","geometry":{"type":"Point","coordinates":[1.0,1.0]},"properties":{}},{"type":"Feature","id":"test","geometry":{"type":"GeometryCollection","geometries":[{"type":"MultiPoint","coordinates":[[3.0,2.0],[5.0,4.0]]},{"type":"Point","coordinates":[6.0,5.0]}]},"properties":{}}]}""", actual)
+    }
+
+    @Test
     fun threeD_test() {
         val actual = feature {
             withGeometry {

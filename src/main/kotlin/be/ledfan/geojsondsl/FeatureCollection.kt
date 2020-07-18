@@ -35,6 +35,10 @@ class FeatureCollection {
         features.add(Feature().apply(feature))
     }
 
+    fun withFeature(feature: Feature) {
+        features.add(feature)
+    }
+
 }
 
 fun featureCollection(featureCollection: FeatureCollection.() -> Unit = {}): FeatureCollection {
